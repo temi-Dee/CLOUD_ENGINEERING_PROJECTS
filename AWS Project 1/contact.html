@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Daniel Ayodele — AWS Cloud Engineer</title>
+  <meta name="description"
+    content="Get in touch with Daniel Ayodele — AWS Cloud Engineer and Cybersecurity Enthusiast." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="Daniel Ayodele" class="nav-logo-img" />
+        <span class="nav-tagline">AWS Cloud Engineer<span class="nav-tagline-sep">|</span>Cybersecurity</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="contact.html" class="nav-active">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light mode">
+          <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <span class="tag"><i class="fas fa-envelope"></i> Get In Touch</span>
+      <h1>Let's <span class="gradient-text">Connect</span></h1>
+      <p>Have a project idea, collaboration proposal, or just want to talk cloud and security? I'd love to hear from
+        you.</p>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="section contact-section">
+    <div class="container contact-grid">
+
+      <!-- Form -->
+      <div class="form-wrap">
+        <h2>Send a Message</h2>
+        <p class="form-intro">I'll get back to you within 24 hours.</p>
+
+        <form id="contactForm" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name <span class="req">*</span></label>
+              <input type="text" id="firstName" name="firstName" placeholder="John" required />
+              <span class="err" id="firstNameErr"></span>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name <span class="req">*</span></label>
+              <input type="text" id="lastName" name="lastName" placeholder="Doe" required />
+              <span class="err" id="lastNameErr"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address <span class="req">*</span></label>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required />
+            <span class="err" id="emailErr"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="topic">Topic <span class="req">*</span></label>
+            <select id="topic" name="topic" required>
+              <option value="" disabled selected>Select a topic…</option>
+              <option value="aws-project">AWS Cloud Project</option>
+              <option value="cybersecurity">Cybersecurity Collaboration</option>
+              <option value="devops">DevOps / Automation</option>
+              <option value="blog">Blog / Content</option>
+              <option value="hiring">Hiring / Opportunity</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="err" id="topicErr"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message <span class="req">*</span></label>
+            <textarea id="message" name="message" rows="6" placeholder="Tell me about your project, idea, or question…"
+              required></textarea>
+            <span class="err" id="messageErr"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+            <i class="fas fa-paper-plane"></i>
+            <span id="btnText">Send Message</span>
+            <i class="fas fa-circle-notch fa-spin hidden" id="btnSpinner"></i>
+          </button>
+        </form>
+
+        <!-- Success state -->
+        <div class="form-success hidden" id="formSuccess">
+          <i class="fas fa-circle-check"></i>
+          <h3>Message Sent!</h3>
+          <p>Thanks for reaching out. I'll reply within 24 hours.</p>
+          <a href="index.html" class="btn btn-ghost">Back to Home</a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="contact-aside">
+
+        <div class="info-card">
+          <h3>Contact Details</h3>
+          <div class="info-row">
+            <div class="info-ico"><i class="fas fa-envelope"></i></div>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:ayodeledaniel0240@gmail.com">ayodeledaniel0240@gmail.com</a>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-ico whatsapp-ico"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/2349039062561?text=Hi%20Daniel!%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect."
+                target="_blank" rel="noopener">+234 903 906 2561</a>
+            </div>
+          </div>
+          <div>
+            <strong>LinkedIn</strong>
+            <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank"
+              rel="noopener">linkedin.com/in/danielayodele0420</a>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-ico github-ico"><i class="fab fa-github"></i></div>
+          <div>
+            <strong>GitHub</strong>
+            <a href="https://github.com/temi-Dee" target="_blank" rel="noopener">github.com/temi-Dee</a>
+          </div>
+        </div>
+    </div>
+
+    <div class="availability-card">
+      <div class="avail-dot"></div>
+      <div>
+        <strong>Available for Opportunities</strong>
+        <p>Open to cloud engineering roles, freelance projects, and cybersecurity collaborations.</p>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>What I Can Help With</h3>
+      <ul class="help-list">
+        <li><i class="fab fa-aws"></i> AWS Architecture &amp; Consulting</li>
+        <li><i class="fas fa-shield-halved"></i> Cloud Security Reviews</li>
+        <li><i class="fas fa-infinity"></i> DevOps Pipeline Setup</li>
+        <li><i class="fas fa-code"></i> Infrastructure as Code (Terraform)</li>
+        <li><i class="fas fa-pen-nib"></i> Technical Writing &amp; Tutorials</li>
+        <li><i class="fas fa-chalkboard-teacher"></i> Mentorship &amp; Guidance</li>
+      </ul>
+    </div>
+
+    </aside>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/logo.png" alt="Daniel Ayodele" class="nav-logo-img" />
+        </a>
+        <p>AWS Cloud Engineer &amp; Cybersecurity Enthusiast building secure, scalable cloud solutions.</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#cybersecurity">Cybersecurity</a></li>
+          <li><a href="index.html#labs">AWS Labs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-connect">
+        <h4>Connect</h4>
+        <div class="footer-socials">
+          <a href="https://github.com/temi-Dee" target="_blank" rel="noopener" aria-label="GitHub"><i
+              class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener"
+            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:ayodeledaniel0240@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 Daniel Ayodele | AWS Cloud Engineer &amp; Cybersecurity Enthusiast</p>
+      <div class="footer-links">
+        <a href="https://github.com/temi-Dee" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/2349039062561?text=Hi%20Daniel!%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect."
+    class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Chat on WhatsApp</span>
+  </a>
+
+  <script src="js/main.js"></script>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Daniel Ayodele — AWS Cloud Engineer</title>
+  <meta name="description"
+    content="AWS tutorials, cybersecurity write-ups, and hands-on lab walkthroughs by Daniel Ayodele." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="Daniel Ayodele" class="nav-logo-img" />
+        <span class="nav-tagline">AWS Cloud Engineer<span class="nav-tagline-sep">|</span>Cybersecurity</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="blog.html" class="nav-active">Blog</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light mode">
+          <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <span class="tag"><i class="fas fa-book-open"></i> Blog</span>
+      <h1>Articles, Labs &amp; <span class="gradient-text">Write-Ups</span></h1>
+      <p>AWS cloud engineering tutorials, cybersecurity write-ups, and hands-on lab walkthroughs — documented as I learn
+        and build.</p>
+    </div>
+  </section>
+
+  <!-- ===== BLOG CONTENT ===== -->
+  <section class="section blog-page-section">
+    <div class="container">
+
+      <!-- Search -->
+      <div class="blog-search-wrap">
+        <div class="blog-search">
+          <i class="fas fa-magnifying-glass"></i>
+          <input type="text" id="blogSearch" placeholder="Search articles, labs, topics..." autocomplete="off" />
+          <button class="search-clear hidden" id="searchClear" aria-label="Clear search"><i
+              class="fas fa-xmark"></i></button>
+        </div>
+        <span class="search-count" id="searchCount"></span>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="blog-tabs" id="blogTabs">
+        <button class="blog-tab active" data-filter="all">
+          <i class="fas fa-border-all"></i> All Posts
+        </button>
+        <button class="blog-tab" data-filter="aws">
+          <i class="fab fa-aws"></i> AWS Cloud
+        </button>
+        <button class="blog-tab" data-filter="security">
+          <i class="fas fa-shield-halved"></i> Cybersecurity
+        </button>
+        <button class="blog-tab" data-filter="labs">
+          <i class="fas fa-flask"></i> AWS Labs
+        </button>
+      </div>
+
+      <!-- Posts Grid -->
+      <div class="blog-posts-grid" id="blogPostsGrid">
+
+        <!-- POST 01 — AWS -->
+        <article class="blog-card" data-category="aws">
+          <div class="blog-card-top">
+            <div class="blog-icon"><i class="fab fa-aws"></i></div>
+            <span class="blog-cat">AWS Cloud Engineering</span>
+          </div>
+          <h3>Building My First AWS Project — S3, CloudFront, Route 53 &amp; ACM</h3>
+          <p>How I deployed a fully functional personal portfolio on AWS using core cloud services and what I learned
+            about S3 hosting, CDN, DNS, and HTTPS.</p>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span><i class="fas fa-clock"></i> 8 min read</span>
+              <span><i class="fas fa-calendar"></i> 2026</span>
+            </div>
+            <div class="card-tech"><span>S3</span><span>CloudFront</span><span>Route 53</span><span>ACM</span></div>
+            <a href="blog-post-1.html" class="card-link">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- PLACEHOLDER — Cybersecurity -->
+        <article class="blog-card blog-card-placeholder" data-category="security">
+          <div class="blog-card-top">
+            <div class="blog-icon"><i class="fas fa-lock"></i></div>
+            <span class="blog-cat">Cybersecurity</span>
+          </div>
+          <h3>How IAM Prevents Unauthorized Access</h3>
+          <p>A deep dive into AWS IAM policies, roles, and permission boundaries to lock down your cloud environment.
+          </p>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span><i class="fas fa-hourglass-half"></i> Coming Soon</span>
+            </div>
+            <span class="coming-soon-pill"><i class="fas fa-clock"></i> In Progress</span>
+          </div>
+        </article>
+
+        <!-- PLACEHOLDER — Cybersecurity -->
+        <article class="blog-card blog-card-placeholder" data-category="security">
+          <div class="blog-card-top">
+            <div class="blog-icon"><i class="fas fa-fire-flame-curved"></i></div>
+            <span class="blog-cat">Cybersecurity</span>
+          </div>
+          <h3>Beginner Guide to AWS Security Groups</h3>
+          <p>Understanding inbound/outbound rules, stateful filtering, and how to harden your EC2 instances.</p>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span><i class="fas fa-hourglass-half"></i> Coming Soon</span>
+            </div>
+            <span class="coming-soon-pill"><i class="fas fa-clock"></i> In Progress</span>
+          </div>
+        </article>
+
+        <!-- PLACEHOLDER — Cybersecurity -->
+        <article class="blog-card blog-card-placeholder" data-category="security">
+          <div class="blog-card-top">
+            <div class="blog-icon"><i class="fab fa-linux"></i></div>
+            <span class="blog-cat">Cybersecurity</span>
+          </div>
+          <h3>Linux Hardening Techniques</h3>
+          <p>Step-by-step guide to securing Linux servers: SSH hardening, firewall rules, user permissions, and audit
+            logging.</p>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span><i class="fas fa-hourglass-half"></i> Coming Soon</span>
+            </div>
+            <span class="coming-soon-pill"><i class="fas fa-clock"></i> In Progress</span>
+          </div>
+        </article>
+
+        <!-- PLACEHOLDER — Labs -->
+        <article class="blog-card blog-card-placeholder" data-category="labs">
+          <div class="blog-card-top">
+            <div class="blog-icon"><i class="fas fa-server"></i></div>
+            <span class="blog-cat">AWS Labs</span>
+          </div>
+          <h3>Lab 01 — Launch Your First EC2 Instance</h3>
+          <p>Configure, launch, and SSH into an EC2 instance with a custom security group from scratch.</p>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span><i class="fas fa-hourglass-half"></i> Coming Soon</span>
+            </div>
+            <span class="coming-soon-pill"><i class="fas fa-clock"></i> In Progress</span>
+          </div>
+        </article>
+
+        <!-- PLACEHOLDER — Labs -->
+        <article class="blog-card blog-card-placeholder" data-category="labs">
+          <div class="blog-card-top">
+            <div class="blog-icon"><i class="fas fa-network-wired"></i></div>
+            <span class="blog-cat">AWS Labs</span>
+          </div>
+          <h3>Lab 02 — Build a 3-Tier VPC from Scratch</h3>
+          <p>Create a production-ready VPC with web, app, and database tiers using subnets and route tables.</p>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span><i class="fas fa-hourglass-half"></i> Coming Soon</span>
+            </div>
+            <span class="coming-soon-pill"><i class="fas fa-clock"></i> In Progress</span>
+          </div>
+        </article>
+
+        <!-- PLACEHOLDER — Labs -->
+        <article class="blog-card blog-card-placeholder" data-category="labs">
+          <div class="blog-card-top">
+            <div class="blog-icon"><i class="fas fa-bolt"></i></div>
+            <span class="blog-cat">AWS Labs</span>
+          </div>
+          <h3>Lab 03 — Deploy a Serverless API with Lambda</h3>
+          <p>Build and deploy a REST API using AWS Lambda, API Gateway, and DynamoDB.</p>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span><i class="fas fa-hourglass-half"></i> Coming Soon</span>
+            </div>
+            <span class="coming-soon-pill"><i class="fas fa-clock"></i> In Progress</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Empty state (shown when filter has no published posts) -->
+      <div class="blog-empty hidden" id="blogEmpty">
+        <i class="fas fa-pen-to-square"></i>
+        <p>Articles in this category are coming soon. Follow me on <a
+            href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener">LinkedIn</a> for
+          updates.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/logo.png" alt="Daniel Ayodele" class="nav-logo-img" />
+        </a>
+        <p>AWS Cloud Engineer &amp; Cybersecurity Enthusiast building secure, scalable cloud solutions.</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-connect">
+        <h4>Connect</h4>
+        <div class="footer-socials">
+          <a href="https://github.com/temi-Dee" target="_blank" rel="noopener" aria-label="GitHub"><i
+              class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener"
+            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:ayodeledaniel0240@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 Daniel Ayodele | AWS Cloud Engineer &amp; Cybersecurity Enthusiast</p>
+      <div class="footer-links">
+        <a href="https://github.com/temi-Dee" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/2349039062561?text=Hi%20Daniel!%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect."
+    class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Chat on WhatsApp</span>
+  </a>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

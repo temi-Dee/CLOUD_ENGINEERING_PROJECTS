@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | Daniel Ayodele</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="Daniel Ayodele" class="nav-logo-img" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light mode">
+          <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== 404 CONTENT ===== -->
+  <section class="not-found-section">
+    <div class="container not-found-inner">
+
+      <div class="not-found-terminal">
+        <div class="terminal-bar"><span></span><span></span><span></span></div>
+        <pre class="terminal-body"><span class="t-green">$</span> curl https://danielayodele.cloud<span class="blink">_</span>
+<span class="t-cyan">→ Resolving DNS...</span>
+<span class="t-cyan">→ Connecting to CloudFront...</span>
+<span class="t-green">→ Status: </span><span style="color:#f87171;">404 Not Found</span>
+<span class="t-cyan">→ The page you requested does not exist.</span></pre>
+      </div>
+
+      <div class="not-found-body">
+        <div class="not-found-code">404</div>
+        <h1>Page Not Found</h1>
+        <p>The page you're looking for doesn't exist, was moved, or the URL might be incorrect.</p>
+        <div class="not-found-actions">
+          <a href="index.html" class="btn btn-primary"><i class="fas fa-house"></i> Back to Home</a>
+          <a href="blog.html" class="btn btn-ghost"><i class="fas fa-book-open"></i> Read the Blog</a>
+          <a href="contact.html" class="btn btn-outline"><i class="fas fa-envelope"></i> Contact Me</a>
+        </div>
+        <div class="not-found-links">
+          <p>Or jump to:</p>
+          <div class="not-found-quick">
+            <a href="index.html#projects"><i class="fas fa-folder-open"></i> Projects</a>
+            <a href="index.html#about"><i class="fas fa-user"></i> About</a>
+            <a href="blog.html"><i class="fas fa-pen-nib"></i> Blog</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/logo.png" alt="Daniel Ayodele" class="nav-logo-img" />
+        </a>
+        <p>AWS Cloud Engineer &amp; Cybersecurity Enthusiast building secure, scalable cloud solutions.</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-connect">
+        <h4>Connect</h4>
+        <div class="footer-socials">
+          <a href="https://github.com/temi-Dee" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:ayodeledaniel0240@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 Daniel Ayodele | AWS Cloud Engineer &amp; Cybersecurity Enthusiast</p>
+      <div class="footer-links">
+        <a href="https://github.com/temi-Dee" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

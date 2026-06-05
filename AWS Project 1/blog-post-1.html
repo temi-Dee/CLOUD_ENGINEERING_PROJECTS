@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building My First AWS Project — S3, CloudFront, Route 53 & ACM | Daniel Ayodele</title>
+  <meta name="description" content="How I deployed my personal portfolio on AWS using S3, CloudFront, Route 53, and ACM — a beginner cloud engineering project walkthrough." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="Daniel Ayodele" class="nav-logo-img" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="blog.html" class="nav-active">Blog</a></li>
+        <li><a href="index.html#labs">AWS Labs</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light mode">
+          <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== ARTICLE HERO ===== -->
+  <section class="article-hero">
+    <div class="container article-hero-inner">
+      <div class="article-meta-top">
+        <span class="blog-cat-pill"><i class="fab fa-aws"></i> AWS Cloud Engineering</span>
+        <span class="article-read-time"><i class="fas fa-clock"></i> 8 min read</span>
+      </div>
+      <h1>Building My First AWS Cloud Engineering Project — Hosting a Personal Portfolio with S3, CloudFront, Route 53 &amp; ACM</h1>
+      <p class="article-subtitle">How I deployed a fully functional personal portfolio using core AWS services — and what I learned along the way.</p>
+      <div class="article-author">
+        <img src="assets/daniel.png" alt="Daniel Ayodele" class="author-avatar" />
+        <div>
+          <strong>Daniel Ayodele</strong>
+          <span>AWS Cloud Engineer &amp; Cybersecurity Enthusiast</span>
+        </div>
+      </div>
+      <div class="article-tags">
+        <span>S3</span><span>CloudFront</span><span>Route 53</span><span>ACM</span><span>Beginner</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ARTICLE BODY ===== -->
+  <article class="article-body">
+    <div class="container article-layout">
+
+      <!-- Main Content -->
+      <div class="article-content">
+
+        <p class="article-lead">As part of my AWS Cloud Engineering journey, I recently completed my first hands-on cloud project: deploying a fully functional personal portfolio and technical blog using core AWS services. This project was more than just hosting a website — it was an opportunity to understand how cloud infrastructure works behind the scenes.</p>
+
+        <hr class="article-divider" />
+
+        <h2>Project Overview</h2>
+        <p>The goal of this project was to build and deploy a personal portfolio and blog that showcases:</p>
+        <ul>
+          <li>AWS cloud projects</li>
+          <li>Cybersecurity write-ups</li>
+          <li>Hands-on labs</li>
+          <li>Technical skills</li>
+          <li>Contact information</li>
+        </ul>
+        <p>Instead of using traditional shared hosting platforms, I wanted to understand how professional cloud environments are structured using AWS services.</p>
+
+        <hr class="article-divider" />
+
+        <h2>Technologies and AWS Services Used</h2>
+        <p>This project was built with HTML, CSS, and JavaScript, and deployed using:</p>
+
+        <div class="article-table-wrap">
+          <table class="article-table">
+            <thead>
+              <tr><th>AWS Service</th><th>Purpose</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="code-inline">Amazon S3</span></td><td>Static website hosting</td></tr>
+              <tr><td><span class="code-inline">Amazon CloudFront</span></td><td>CDN and HTTPS delivery</td></tr>
+              <tr><td><span class="code-inline">AWS Certificate Manager (ACM)</span></td><td>SSL/TLS certificate management</td></tr>
+              <tr><td><span class="code-inline">Amazon Route 53</span></td><td>Custom domain DNS management</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="article-divider" />
+
+        <h2>Why I Chose AWS for This Project</h2>
+        <p>AWS is one of the most widely used cloud platforms globally, and learning it practically is essential for cloud engineering and cybersecurity roles. This project introduced me to foundational concepts including object storage, CDN architecture, DNS routing, SSL/TLS encryption, bucket policies, and cloud-based website delivery.</p>
+        <p>Rather than learning these concepts theoretically, I implemented them directly in a real-world deployment.</p>
+
+        <hr class="article-divider" />
+
+        <h2>Project Architecture</h2>
+        <p>The website follows a simple cloud-native static hosting architecture:</p>
+
+        <div class="code-block">
+          <div class="code-block-header"><span>Architecture Diagram</span></div>
+          <pre>User Browser
+      │
+      ▼
+Amazon Route 53
+      │
+      ▼
+Amazon CloudFront CDN
+      │
+      ▼
+Amazon S3 Static Website Hosting</pre>
+        </div>
+
+        <p>This architecture allows the website to load securely over HTTPS while leveraging CloudFront edge locations for faster global content delivery.</p>
+
+        <hr class="article-divider" />
+
+        <h2>Step 1 — Hosting the Website on Amazon S3</h2>
+        <p>The first part of the project involved configuring an S3 bucket for static website hosting. This required:</p>
+        <ul>
+          <li>Creating a globally unique bucket</li>
+          <li>Enabling static website hosting</li>
+          <li>Configuring <span class="code-inline">index.html</span> as the default root document</li>
+          <li>Writing bucket policies to allow public read access</li>
+        </ul>
+        <p>One important lesson I learned was understanding the difference between the S3 REST endpoint and the S3 static website endpoint — a distinction that becomes critical when integrating CloudFront.</p>
+
+        <div class="article-callout info">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Key Insight:</strong> Always use the S3 <em>website endpoint</em> (not the bucket ARN) as the CloudFront origin. This ensures proper routing of requests to <code>index.html</code>.</div>
+        </div>
+
+        <hr class="article-divider" />
+
+        <h2>Step 2 — Configuring HTTPS with ACM</h2>
+        <p>To secure the website, I used AWS Certificate Manager (ACM) to request a free SSL/TLS certificate. One important detail I discovered is that CloudFront certificates must be created in the <strong>us-east-1</strong> region, regardless of where the rest of the infrastructure is deployed.</p>
+        <p>The certificate was validated automatically using DNS verification through Route 53. This step helped me understand HTTPS encryption, certificate validation, and secure web communication.</p>
+
+        <div class="article-callout warning">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Important:</strong> ACM certificates for CloudFront must always be requested in <strong>us-east-1 (N. Virginia)</strong> — even if your S3 bucket is in a different region.</div>
+        </div>
+
+        <hr class="article-divider" />
+
+        <h2>Step 3 — Setting Up CloudFront CDN</h2>
+        <p>After hosting the files in S3, I created a CloudFront distribution. CloudFront serves as a Content Delivery Network (CDN) that caches website files at AWS edge locations globally. Key configurations included:</p>
+        <ul>
+          <li>Redirecting HTTP traffic to HTTPS</li>
+          <li>Adding custom domain names (CNAMEs)</li>
+          <li>Attaching the ACM certificate</li>
+          <li>Setting the S3 website endpoint as the origin</li>
+        </ul>
+        <p>This significantly improves website performance and scalability for users across different geographic regions.</p>
+
+        <hr class="article-divider" />
+
+        <h2>Step 4 — Connecting the Domain with Route 53</h2>
+        <p>Next, I configured Route 53 to connect the custom domain to CloudFront. This involved creating A records and alias records, routing traffic directly to the CloudFront distribution. Once DNS propagation completed, the website became publicly accessible using HTTPS.</p>
+
+        <hr class="article-divider" />
+
+        <h2>Challenges I Encountered</h2>
+        <p>Like many cloud projects, this deployment came with a few troubleshooting moments. Some of the issues I encountered included:</p>
+        <ul>
+          <li>Bucket permission errors when public access was blocked</li>
+          <li>Incorrect origin configuration (using bucket ARN instead of website endpoint)</li>
+          <li>SSL certificate delays during DNS validation</li>
+          <li>CloudFront cache propagation taking longer than expected</li>
+        </ul>
+        <p>Working through these challenges helped me better understand how AWS services interact in real-world deployments.</p>
+
+        <hr class="article-divider" />
+
+        <h2>Skills I Gained From This Project</h2>
+
+        <div class="skills-gained-grid">
+          <div class="skills-gained-card">
+            <h4><i class="fab fa-aws"></i> Cloud Engineering</h4>
+            <ul><li>Static website hosting</li><li>CDN implementation</li><li>DNS routing</li><li>Infrastructure configuration</li></ul>
+          </div>
+          <div class="skills-gained-card">
+            <h4><i class="fas fa-shield-halved"></i> Security</h4>
+            <ul><li>HTTPS setup</li><li>SSL/TLS certificates</li><li>Secure content delivery</li></ul>
+          </div>
+          <div class="skills-gained-card">
+            <h4><i class="fas fa-cloud"></i> AWS Services</h4>
+            <ul><li>Amazon S3</li><li>CloudFront</li><li>Route 53</li><li>ACM</li></ul>
+          </div>
+          <div class="skills-gained-card">
+            <h4><i class="fas fa-code"></i> Frontend Deployment</h4>
+            <ul><li>HTML/CSS/JS deployment</li><li>Responsive design hosting</li><li>Asset management</li></ul>
+          </div>
+        </div>
+
+        <hr class="article-divider" />
+
+        <h2>Key Takeaways</h2>
+        <p>One of the biggest lessons from this project is that cloud engineering is not only about writing code — it is also about understanding the infrastructure that powers applications. Even a simple static website involves networking, security, storage, DNS, caching, and deployment architecture.</p>
+
+        <div class="article-callout success">
+          <i class="fas fa-circle-check"></i>
+          <div><strong>Takeaway:</strong> This project gave me practical exposure to concepts commonly used in production cloud environments — and proved that hands-on learning is far more effective than theory alone.</div>
+        </div>
+
+        <hr class="article-divider" />
+
+        <h2>What's Next?</h2>
+        <p>As I continue my AWS and cybersecurity journey, I plan to expand this project further by adding:</p>
+        <ul>
+          <li>CI/CD pipelines with GitHub Actions</li>
+          <li>Infrastructure as Code with Terraform</li>
+          <li>Monitoring and logging with CloudWatch</li>
+          <li>Serverless backend APIs with Lambda</li>
+          <li>Advanced AWS security configurations</li>
+        </ul>
+
+        <hr class="article-divider" />
+
+        <h2>Conclusion</h2>
+        <p>Deploying my personal portfolio on AWS taught me that even beginner projects can provide deep insight into cloud architecture and infrastructure design. Every deployment challenge became a learning opportunity, and every AWS service introduced a new layer of understanding about how modern applications are delivered securely at scale.</p>
+        <p>This is only the beginning, and I'm excited to continue learning, building, and securing.</p>
+
+        <!-- Tech Stack Summary -->
+        <div class="article-tech-stack">
+          <h4>Tech Stack</h4>
+          <div class="card-tech">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+            <span>Amazon S3</span><span>CloudFront</span><span>Route 53</span><span>ACM</span>
+          </div>
+        </div>
+
+        <!-- Article Footer Actions -->
+        <div class="article-footer-actions">
+          <a href="blog.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+          <a href="https://wa.me/2349039062561?text=Hi%20Daniel!%20I%20read%20your%20AWS%20article%20and%20would%20like%20to%20connect." target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Discuss on WhatsApp</a>
+        </div>
+
+      </div>
+
+      <!-- Sidebar TOC -->
+      <aside class="article-sidebar">
+        <div class="toc-card">
+          <h4><i class="fas fa-list"></i> Table of Contents</h4>
+          <ol class="toc-list">
+            <li><a href="#" onclick="scrollTo('.article-content h2:nth-of-type(1)')">Project Overview</a></li>
+            <li><a href="#" onclick="return false;">Technologies Used</a></li>
+            <li><a href="#" onclick="return false;">Why AWS?</a></li>
+            <li><a href="#" onclick="return false;">Architecture</a></li>
+            <li><a href="#" onclick="return false;">Step 1 — S3 Hosting</a></li>
+            <li><a href="#" onclick="return false;">Step 2 — HTTPS / ACM</a></li>
+            <li><a href="#" onclick="return false;">Step 3 — CloudFront</a></li>
+            <li><a href="#" onclick="return false;">Step 4 — Route 53</a></li>
+            <li><a href="#" onclick="return false;">Challenges</a></li>
+            <li><a href="#" onclick="return false;">Skills Gained</a></li>
+            <li><a href="#" onclick="return false;">Conclusion</a></li>
+          </ol>
+        </div>
+
+        <div class="author-card">
+          <img src="assets/daniel.png" alt="Daniel Ayodele" class="author-card-avatar" />
+          <h4>Daniel Ayodele</h4>
+          <p>AWS Cloud Engineer &amp; Cybersecurity Enthusiast documenting my cloud journey one project at a time.</p>
+          <div class="author-socials">
+            <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/temi-Dee" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+            <a href="mailto:ayodeledaniel0240@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </article>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/logo.png" alt="Daniel Ayodele" class="nav-logo-img" />
+        </a>
+        <p>AWS Cloud Engineer &amp; Cybersecurity Enthusiast building secure, scalable cloud solutions.</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#cybersecurity">Cybersecurity</a></li>
+          <li><a href="index.html#labs">AWS Labs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-connect">
+        <h4>Connect</h4>
+        <div class="footer-socials">
+          <a href="https://github.com/temi-Dee" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:ayodeledaniel0240@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 Daniel Ayodele | AWS Cloud Engineer &amp; Cybersecurity Enthusiast</p>
+      <div class="footer-links">
+        <a href="https://github.com/temi-Dee" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/danielayodele0420/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/2349039062561?text=Hi%20Daniel!%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect."
+     class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Chat on WhatsApp</span>
+  </a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
