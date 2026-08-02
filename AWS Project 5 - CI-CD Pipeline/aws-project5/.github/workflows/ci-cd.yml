@@ -1,0 +1,104 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build and test sample app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies if sample app exists
+        run: |
+          if [ -f my-app/package.json ]; then
+            cd my-app
+            npm ci
+          else
+            echo "No sample app found in my-app/, skipping install."
+          fi
+      - name: Run linting if sample app exists
+        run: |
+          if [ -f my-app/package.json ]; then
+            cd my-app
+            npx eslint src/ --ext .js
+          else
+            echo "No sample app found in my-app/, skipping lint."
+          fi
+      - name: Run tests if sample app exists
+        run: |
+          if [ -f my-app/package.json ]; then
+            cd my-app
+            npm test
+          else
+            echo "No sample app found in my-app/, skipping tests."
+          fi
+      - name: Scan for secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate AWS CLI
+        run: |
+          if command -v aws >/dev/null 2>&1; then
+            aws --version
+          else
+            echo "AWS CLI is not installed."
+            exit 1
+          fi
+  deploy:
+    name: Deploy to AWS
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHubActionsRole
+          aws-region: us-east-1
+      - name: Build application
+        run: |
+          if [ -f my-app/package.json ]; then
+            cd my-app && npm ci && npm run build
+          else
+            mkdir -p dist
+            cp -r . dist/ 2>/dev/null || true
+          fi
+      - name: Deploy to S3 and invalidate CloudFront
+        run: |
+          BUILD_DIR="my-app/dist"
+          [ -d "$BUILD_DIR" ] || BUILD_DIR="dist"
+          aws s3 sync "$BUILD_DIR" "s3://${{ secrets.S3_BUCKET }}" --delete
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ secrets.CF_DISTRIBUTION_ID }}" \
+            --paths "/*"
+      # ── Lambda alternative ────────────────────────────────────────────────
+      # - name: Deploy to Lambda
+      #   run: |
+      #     zip -r function.zip . -x "*.git*" "node_modules/*"
+      #     aws lambda update-function-code \
+      #       --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+      #       --zip-file fileb://function.zip
+      #
+      # ── ECS alternative ──────────────────────────────────────────────────
+      # - name: Deploy to ECS
+      #   run: |
+      #     aws ecs update-service \
+      #       --cluster ${{ secrets.ECS_CLUSTER }} \
+      #       --service ${{ secrets.ECS_SERVICE }} \
+      #       --force-new-deployment

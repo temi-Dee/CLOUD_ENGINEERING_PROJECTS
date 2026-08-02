@@ -1,0 +1,37 @@
+AWS CI/CD Configuration
+=======================
+
+Account ID: 121154743921
+Region: us-east-1
+GitHub Repo: temi-Dee/my-app
+
+Resources Created:
+------------------
+OIDC Provider: token.actions.githubusercontent.com
+IAM Role: GitHubActionsRole (inline least-privilege policy)
+S3 Bucket: my-app-cicd-121154743921-1785696440 (private — served only via CloudFront)
+CloudFront OAC: E8E7B4KVLKFD3
+CloudFront Distribution: ETFF1MFZN7H58
+CloudFront Domain: https://d1spgrwy4y19ef.cloudfront.net
+
+GitHub Secrets to Configure:
+-----------------------------
+AWS_ACCOUNT_ID: 121154743921
+S3_BUCKET: my-app-cicd-121154743921-1785696440
+CF_DISTRIBUTION_ID: ETFF1MFZN7H58
+
+Commands to Set GitHub Secrets:
+--------------------------------
+gh secret set AWS_ACCOUNT_ID --body "121154743921"
+gh secret set S3_BUCKET --body "my-app-cicd-121154743921-1785696440"
+gh secret set CF_DISTRIBUTION_ID --body "ETFF1MFZN7H58"
+
+Test Deployment:
+----------------
+1. Push code to GitHub main branch
+2. Monitor workflow: gh run watch
+3. Visit: https://d1spgrwy4y19ef.cloudfront.net
+
+Cleanup:
+--------
+To delete all resources, run: ./cleanup-pipeline.sh my-app-cicd-121154743921-1785696440 ETFF1MFZN7H58 E8E7B4KVLKFD3

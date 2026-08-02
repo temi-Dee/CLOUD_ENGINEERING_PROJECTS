@@ -1,0 +1,21 @@
+{
+  "name": "aws-project-5---ci-cd-pipeline",
+  "version": "1.0.0",
+  "description": "Your development team needs an automated pipeline that tests code on every commit and deploys successful builds to production. Instead of manually running tests and deployments, you will implement a CI/CD pipeline using GitHub Actions that automatically lints, tests, and deploys your application to AWS with zero manual intervention.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "jest": "^25.0.0",
+    "supertest": "^7.2.2"
+  }
+}
