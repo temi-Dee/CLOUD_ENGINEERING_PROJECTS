@@ -1,0 +1,10 @@
+# Terraform sensitive files — never commit real credentials
+*.tfvars
+*.tfvars.json
+
+# Terraform generated
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+tfplan

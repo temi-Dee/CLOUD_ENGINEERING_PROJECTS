@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form - Project 3</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 40%, #24243e 70%, #1a1a2e 100%);
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background blobs */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            animation: floatBlob 10s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            width: 520px;
+            height: 520px;
+            background: radial-gradient(circle, #7f5af0, #2cb67d);
+            top: -120px;
+            left: -120px;
+        }
+
+        body::after {
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, #ff6b6b, #7f5af0);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatBlob {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(40px, 40px) scale(1.1);
+            }
+        }
+
+        /* Glassmorphism card */
+        .container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 24px;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            max-width: 500px;
+            width: 100%;
+            padding: 44px 40px;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 6px;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 20px rgba(127, 90, 240, 0.6);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 32px;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        /* Input group with floating icon accent */
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 500;
+            font-size: 13px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        /* Glassy inputs */
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px 16px 13px 44px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #fff;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: rgba(127, 90, 240, 0.8);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow:
+                0 0 0 3px rgba(127, 90, 240, 0.2),
+                0 4px 16px rgba(127, 90, 240, 0.15);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 130px;
+            padding-left: 44px;
+        }
+
+        /* Icons inside inputs via pseudo-elements on form-group */
+        .form-group::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 40px;
+            width: 18px;
+            height: 18px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.55;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .form-group.group-name::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'/%3E%3C/svg%3E");
+        }
+
+        .form-group.group-email::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'/%3E%3C/svg%3E");
+        }
+
+        .form-group.group-message::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z'/%3E%3C/svg%3E");
+            top: 42px;
+        }
+
+        /* Submit button */
+        button {
+            width: 100%;
+            background: linear-gradient(135deg, #7f5af0 0%, #2cb67d 100%);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.4px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            box-shadow: 0 4px 20px rgba(127, 90, 240, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(127, 90, 240, 0.55);
+            filter: brightness(1.08);
+        }
+
+        button:active {
+            transform: translateY(0);
+            filter: brightness(0.96);
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+            filter: none;
+        }
+
+        /* Response messages */
+        .message {
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 13.5px;
+            display: none;
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.success {
+            background: rgba(44, 182, 125, 0.18);
+            color: #6ee7b7;
+            border: 1px solid rgba(44, 182, 125, 0.35);
+            display: block;
+        }
+
+        .message.error {
+            background: rgba(255, 107, 107, 0.15);
+            color: #fca5a5;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            display: block;
+        }
+
+        .message.info {
+            background: rgba(127, 90, 240, 0.15);
+            color: #c4b5fd;
+            border: 1px solid rgba(127, 90, 240, 0.3);
+            display: block;
+        }
+
+        /* Spinner */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Tech stack footer */
+        .tech-stack {
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11.5px;
+            letter-spacing: 0.3px;
+        }
+
+        .tech-stack strong {
+            color: rgba(127, 90, 240, 0.85);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📧 Contact Us</h1>
+        <p class="subtitle">Project 3: Serverless Contact Form</p>
+
+        <form id="contactForm">
+            <div class="form-group group-name">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group group-email">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required placeholder="john@example.com">
+            </div>
+
+            <div class="form-group group-message">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">
+                <span id="btnText">Send Message</span>
+                <span id="btnSpinner" class="spinner" style="display: none;"></span>
+            </button>
+        </form>
+
+        <div id="responseMessage" class="message"></div>
+
+        <div class="tech-stack">
+            <strong>Tech Stack:</strong> AWS Lambda + API Gateway + SES
+        </div>
+    </div>
+
+    <script>
+        // IMPORTANT: Replace this with your actual API Gateway endpoint
+        const API_ENDPOINT = 'https://ddl3iwf509.execute-api.us-east-1.amazonaws.com/prod/contact';
+
+        const form = document.getElementById('contactForm');
+        const responseDiv = document.getElementById('responseMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnSpinner = document.getElementById('btnSpinner');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Check if API endpoint is configured
+            if (API_ENDPOINT === 'https://qe2lq0pnd1.execute-api.us-east-1.amazonaws.com/Prod') {
+                showMessage('error', '⚠️ Please configure the API_ENDPOINT in the HTML file with your API Gateway URL');
+                return;
+            }
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                message: document.getElementById('message').value.trim()
+            };
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'inline-block';
+            responseDiv.style.display = 'none';
+
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showMessage('success', '✅ ' + data.message);
+                    form.reset();
+                } else {
+                    showMessage('error', '❌ ' + (data.message || 'Failed to send message'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('error', '❌ Network error. Please check your connection and try again.');
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnSpinner.style.display = 'none';
+            }
+        });
+
+        function showMessage(type, text) {
+            responseDiv.className = 'message ' + type;
+            responseDiv.textContent = text;
+            responseDiv.style.display = 'block';
+
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    responseDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Test mode - show info if endpoint not configured
+        window.addEventListener('load', () => {
+            if (API_ENDPOINT === 'https://qe2lq0pnd1.execute-api.us-east-1.amazonaws.com/Prod') {
+                showMessage('info', 'ℹ️ Demo Mode: Configure API_ENDPOINT to enable form submission');
+            }
+        });
+    </script>
+</body>
+
+</html>
