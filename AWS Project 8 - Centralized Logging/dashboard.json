@@ -1,0 +1,43 @@
+{
+  "widgets": [
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["CustomApp", "ApplicationErrors", {"stat": "Sum"}],
+          ["CustomApp", "5xxErrors", {"stat": "Sum"}]
+        ],
+        "period": 300,
+        "stat": "Sum",
+        "region": "us-east-1",
+        "title": "Error Metrics"
+      }
+    },
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["CustomApp", "APIResponseTime", {"stat": "Average"}]
+        ],
+        "period": 300,
+        "stat": "Average",
+        "region": "us-east-1",
+        "title": "API Response Time"
+      }
+    },
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["AWS/EC2", "CPUUtilization"],
+          ["CustomApp", "MEM_USED"],
+          ["CustomApp", "DISK_USED"]
+        ],
+        "period": 300,
+        "stat": "Average",
+        "region": "us-east-1",
+        "title": "System Metrics"
+      }
+    }
+  ]
+}
