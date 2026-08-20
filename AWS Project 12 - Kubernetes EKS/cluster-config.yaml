@@ -1,0 +1,56 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: my-eks-cluster
+  region: us-east-1
+  version: "1.29"
+  tags:
+    Environment: production
+    Project: eks-demo
+
+iam:
+  withOIDC: true
+
+managedNodeGroups:
+  - name: general-workers
+    instanceType: t3.medium
+    minSize: 2
+    maxSize: 5
+    desiredCapacity: 3
+    volumeSize: 30
+    ssh:
+      allow: false
+    labels:
+      role: general
+    tags:
+      NodeGroup: general-workers
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        albIngress: true
+        cloudWatch: true
+        ebs: true
+
+addons:
+  # Pin addon versions to match your EKS cluster version (1.29).
+  # Find current recommended versions:
+  #   aws eks describe-addon-versions --kubernetes-version 1.29 --addon-name <name> \
+  #     --query 'addons[0].addonVersions[?compatibilities[0].defaultVersion].addonVersion' \
+  #     --output text
+  - name: vpc-cni
+    version: v1.18.1-eksbuild.1
+  - name: coredns
+    version: v1.11.1-eksbuild.9
+  - name: kube-proxy
+    version: v1.29.3-eksbuild.2
+  - name: aws-ebs-csi-driver
+    version: v1.30.0-eksbuild.1
+
+cloudWatch:
+  clusterLogging:
+    enableTypes:
+      - api
+      - audit
+      - authenticator
+      - controllerManager
+      - scheduler
