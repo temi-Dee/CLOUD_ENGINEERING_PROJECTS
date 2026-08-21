@@ -1,0 +1,29 @@
+{
+  "description": "Randomly terminate ECS tasks to test service resilience",
+  "targets": {
+    "ecs-tasks": {
+      "resourceType": "aws:ecs:task",
+      "resourceTags": {"ChaosEnabled": "true"},
+      "selectionMode": "PERCENT(25)"
+    }
+  },
+  "actions": {
+    "stop-tasks": {
+      "actionId": "aws:ecs:stop-task",
+      "parameters": {},
+      "targets": {"Tasks": "ecs-tasks"}
+    }
+  },
+  "stopConditions": [
+    {
+      "source": "aws:cloudwatch:alarm",
+      "value": "arn:aws:cloudwatch:us-east-1:ACCOUNT_ID:alarm:high-error-rate"
+    },
+    {
+      "source": "aws:cloudwatch:alarm",
+      "value": "arn:aws:cloudwatch:us-east-1:ACCOUNT_ID:alarm:high-latency"
+    }
+  ],
+  "roleArn": "arn:aws:iam::ACCOUNT_ID:role/FISExperimentRole",
+  "tags": {"Name": "ECS-Task-Stop-Test"}
+}

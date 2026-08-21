@@ -1,0 +1,18 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: api-latency-injection
+  namespace: production
+spec:
+  action: delay
+  mode: all
+  selector:
+    namespaces:
+      - production
+    labelSelectors:
+      component: api-server
+  delay:
+    latency: "200ms"
+    correlation: "100"
+    jitter: "20ms"
+  duration: 10m

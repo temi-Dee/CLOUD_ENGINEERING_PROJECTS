@@ -1,0 +1,36 @@
+{
+  "description": "CPU stress test on EC2 instances tagged for chaos testing",
+  "targets": {
+    "ec2-instances": {
+      "resourceType": "aws:ec2:instance",
+      "resourceTags": {
+        "Environment": "staging",
+        "ChaosEnabled": "true"
+      },
+      "selectionMode": "COUNT(1)"
+    }
+  },
+  "actions": {
+    "cpu-stress": {
+      "actionId": "aws:ssm:send-command",
+      "parameters": {
+        "documentArn": "arn:aws:ssm:us-east-1::document/AWSFIS-Run-CPU-Stress",
+        "documentParameters": "{\"DurationSeconds\": \"300\", \"CPU\": \"80\"}",
+        "duration": "PT5M"
+      },
+      "targets": {"Instances": "ec2-instances"}
+    }
+  },
+  "stopConditions": [
+    {
+      "source": "aws:cloudwatch:alarm",
+      "value": "arn:aws:cloudwatch:us-east-1:ACCOUNT_ID:alarm:high-error-rate"
+    },
+    {
+      "source": "aws:cloudwatch:alarm",
+      "value": "arn:aws:cloudwatch:us-east-1:ACCOUNT_ID:alarm:high-latency"
+    }
+  ],
+  "roleArn": "arn:aws:iam::ACCOUNT_ID:role/FISExperimentRole",
+  "tags": {"Name": "CPU-Stress-Test"}
+}

@@ -1,0 +1,32 @@
+prometheus:
+  prometheusSpec:
+    retention: 15d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 50Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+
+alertmanager:
+  enabled: true
+
+grafana:
+  # Pass adminPassword at deploy time — Helm does not substitute shell variables in values files:
+  #   helm upgrade --install kube-prometheus-stack ... \
+  #     --set "kube-prometheus-stack.grafana.adminPassword=$GRAFANA_ADMIN_PASSWORD"
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+      alb.ingress.kubernetes.io/ssl-redirect: '443'
+      # Set ACM_CERT_ARN to your ACM certificate ARN at deploy time:
+      #   --set "kube-prometheus-stack.grafana.ingress.annotations.alb\.ingress\.kubernetes\.io/certificate-arn=$ACM_CERT_ARN"
+      alb.ingress.kubernetes.io/certificate-arn: "REPLACE_WITH_ACM_CERT_ARN"
+    hosts:
+      - grafana.example.com

@@ -1,0 +1,12 @@
+{
+  "BudgetName": "Team-Engineering-Budget",
+  "BudgetType": "COST",
+  "TimeUnit": "MONTHLY",
+  "BudgetLimit": {
+    "Amount": "5000",
+    "Unit": "USD"
+  },
+  "CostFilters": {
+    "TagKeyValue": ["user:Team$Engineering"]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "BudgetName": "Monthly-Total-Budget",
+  "BudgetType": "COST",
+  "TimeUnit": "MONTHLY",
+  "BudgetLimit": {
+    "Amount": "10000",
+    "Unit": "USD"
+  },
+  "CostFilters": {},
+  "CostTypes": {
+    "IncludeTax": true,
+    "IncludeSubscription": true,
+    "UseBlended": false
+  },
+  "TimePeriod": {
+    "Start": "2026-05-01T00:00:00Z"
+  }
+}

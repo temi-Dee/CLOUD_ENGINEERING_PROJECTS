@@ -1,0 +1,69 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyWithoutEnvironmentTag",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances",
+        "rds:CreateDBInstance",
+        "s3:CreateBucket",
+        "lambda:CreateFunction"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "aws:RequestTag/Environment": ["production", "staging", "development"]
+        }
+      }
+    },
+    {
+      "Sid": "DenyWithoutTeamTag",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances",
+        "rds:CreateDBInstance",
+        "s3:CreateBucket",
+        "lambda:CreateFunction"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "Null": {
+          "aws:RequestTag/Team": "true"
+        }
+      }
+    },
+    {
+      "Sid": "DenyWithoutApplicationTag",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances",
+        "rds:CreateDBInstance",
+        "s3:CreateBucket",
+        "lambda:CreateFunction"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "Null": {
+          "aws:RequestTag/Application": "true"
+        }
+      }
+    },
+    {
+      "Sid": "DenyWithoutCostCenterTag",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances",
+        "rds:CreateDBInstance",
+        "s3:CreateBucket",
+        "lambda:CreateFunction"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "Null": {
+          "aws:RequestTag/CostCenter": "true"
+        }
+      }
+    }
+  ]
+}

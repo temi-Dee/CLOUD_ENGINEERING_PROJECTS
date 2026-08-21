@@ -1,0 +1,17 @@
+loki:
+  auth_enabled: true
+  storage:
+    type: s3
+    s3:
+      region: us-east-1
+      bucketnames:
+        - loki-logs-ACCOUNT_ID
+  schema_config:
+    configs:
+      - from: 2024-01-01
+        store: tsdb
+        object_store: s3
+        schema: v13
+        index:
+          prefix: loki_index_
+          period: 24h

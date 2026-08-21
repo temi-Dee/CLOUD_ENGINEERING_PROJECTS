@@ -1,0 +1,44 @@
+[
+  {
+    "Notification": {
+      "NotificationType": "ACTUAL",
+      "ComparisonOperator": "GREATER_THAN",
+      "Threshold": 75,
+      "ThresholdType": "PERCENTAGE"
+    },
+    "Subscribers": [
+      {
+        "SubscriptionType": "SNS",
+        "Address": "arn:aws:sns:us-east-1:YOUR_ACCOUNT_ID:billing-alerts"
+      }
+    ]
+  },
+  {
+    "Notification": {
+      "NotificationType": "ACTUAL",
+      "ComparisonOperator": "GREATER_THAN",
+      "Threshold": 90,
+      "ThresholdType": "PERCENTAGE"
+    },
+    "Subscribers": [
+      {
+        "SubscriptionType": "SNS",
+        "Address": "arn:aws:sns:us-east-1:YOUR_ACCOUNT_ID:billing-alerts"
+      }
+    ]
+  },
+  {
+    "Notification": {
+      "NotificationType": "FORECASTED",
+      "ComparisonOperator": "GREATER_THAN",
+      "Threshold": 100,
+      "ThresholdType": "PERCENTAGE"
+    },
+    "Subscribers": [
+      {
+        "SubscriptionType": "SNS",
+        "Address": "arn:aws:sns:us-east-1:YOUR_ACCOUNT_ID:billing-alerts"
+      }
+    ]
+  }
+]

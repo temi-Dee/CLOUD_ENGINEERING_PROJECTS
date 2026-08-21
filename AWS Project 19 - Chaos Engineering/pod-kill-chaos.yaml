@@ -1,0 +1,17 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-kill-web-servers
+  namespace: production
+spec:
+  action: pod-kill
+  mode: one
+  selector:
+    namespaces:
+      - production
+    labelSelectors:
+      app: web-server
+      chaos: enabled
+  scheduler:
+    cron: '0 2 * * *'
+  duration: 5m

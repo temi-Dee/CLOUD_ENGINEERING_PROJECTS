@@ -1,0 +1,43 @@
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      retention: 15d
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 20Gi
+
+  grafana:
+    # Pass adminPassword at deploy time:
+    #   --set kube-prometheus-stack.grafana.adminPassword=$GRAFANA_ADMIN_PASSWORD
+    adminPassword: "${GRAFANA_ADMIN_PASSWORD}"
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: alb
+      hosts:
+        - grafana.example.com
+    persistence:
+      enabled: true
+      size: 5Gi
+
+  alertmanager:
+    enabled: true
+    alertmanagerSpec:
+      storage:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 2Gi
+
+  defaultRules:
+    create: true
+    rules:
+      alertmanager: true
+      etcd: false       # not exposed in managed EKS
+      kubeScheduler: false  # not exposed in managed EKS

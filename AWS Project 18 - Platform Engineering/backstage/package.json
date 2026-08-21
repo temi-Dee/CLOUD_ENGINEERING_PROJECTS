@@ -1,0 +1,24 @@
+{
+  "name": "backstage-platform",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "backstage-cli app:start",
+    "build": "backstage-cli app:build",
+    "test": "backstage-cli test"
+  },
+  "dependencies": {
+    "@backstage/app-defaults": "^1.5.0",
+    "@backstage/core-app-api": "^1.12.0",
+    "@backstage/core-components": "^0.14.0",
+    "@backstage/core-plugin-api": "^1.9.0",
+    "@backstage/plugin-catalog": "^1.19.0",
+    "@backstage/plugin-scaffolder": "^1.21.0",
+    "@backstage/theme": "^0.5.0",
+    "react": "^18.0.2",
+    "react-dom": "^18.0.2"
+  },
+  "devDependencies": {
+    "@backstage/cli": "^0.26.0"
+  }
+}
