@@ -1,4 +1,4 @@
-# Replace YOUR_USERNAME with your GitHub username or organization before applying.
+# Replace  with your GitHub username or organization before applying.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/YOUR_USERNAME/gitops-apps
+    repoURL: https://github.com/temi-Dee/gitops-apps
     targetRevision: HEAD
     path: frontend
     helm:
